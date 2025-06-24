@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mochila Fraccionaria</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  
+  <div class="contenedor">
+    <label>Peso máximo de la mochila <br><input type="number" id="pesoMaximo" placeholder="Coloca el peso que desees"></label>
+    <div id="contenedorI"></div>
+    <button class="botonA" onclick="agregarObjeto()">Agregar objeto</button>
+    <button onclick="runKnapsack()">Ejecutar</button>
+  </div>
+
+  <div class="mochilaF">
+    <div class="mochila" id="mochila"></div>
+    <h3 id="totalM"></h3>
+    <div class="barra">
+      <div class="barraLlena" id="barraL">0%</div>
+      <div class="barraVacia" id="barraV">100%</div>
+    </div>
+    <div class="pasosR" id="pasosR"></div>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
+
