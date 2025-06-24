@@ -1,5 +1,7 @@
 *{
   font-family: "DynaPuff", system-ui;;
+  box-sizing: border-box;
+  list-style: none;
 }
 
 input[type=number]::-webkit-outer-spin-button,
@@ -15,7 +17,6 @@ input[type=number] {
 body {
   font-family: Arial, sans-serif;
   background: #eff1f1;
-  padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -229,29 +230,28 @@ h1 {
   height: 70px;
 }
 
-/* NUEVO: estilo para inputs resaltados cuando el item está en la mochila */
+
 .resaltado {
-  background-color: #ffe082;
-  border-color: #ffb300 !important;
+  background-color: #90abe2;
+  border-color: #90abe2 !important;
   transition: background-color 0.7s ease, border-color 0.7s ease;
 }
 
-/* NUEVO: estilos para billetes animados en el cajero */
+
 .billete {
-  background-color: #fdd835;
+  background-color: #35a84a;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   padding: 8px 15px;
   margin: 5px;
   font-weight: bold;
-  color: #5d4037;
-  font-size: 18px;
+  color: #ffffff;
+  font-size: 14px;
   opacity: 0;
   animation: caer 0.5s forwards;
   user-select: none;
 }
 
-/* Animación para billetes que caen */
 @keyframes caer {
   0% {
     opacity: 0;
@@ -261,4 +261,82 @@ h1 {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+.footer{
+    text-align: center;
+    width: 100%;
+    font-family: "Glory", serif; 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #212329;
+    min-height: 100px;
+    box-shadow: 0px -9px 10px rgba(0, 0, 0, 0.5);
+}
+
+.pie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 60px;
+}
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.links li{
+    margin: 10px;
+    list-style: none;
+    width: 300px; 
+    text-align: center;
+}
+
+.links li a{
+    text-decoration: none;
+    color: #7d839c;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.pie p{
+    color: #b1b6ca;
+}
+
+.pie img{
+    filter: grayscale(120%);
+    transition: all 0.5s;
+    opacity: 50%;
+}
+
+.pie img:hover{
+    transform: scale(1.5);
+    opacity: 100%;
+    filter: grayscale(0%) drop-shadow(0px 5px 20px rgb(24, 91, 235));
+}
+
+
+header{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all .25s ease;
+  background: #212329;
+  color: white;
 }
