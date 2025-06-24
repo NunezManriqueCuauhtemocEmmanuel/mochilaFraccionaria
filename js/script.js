@@ -2,7 +2,7 @@ function agregarObjeto() {
   const container = document.getElementById("contenedorI");
   const div = document.createElement("div");
   div.className = "item";
-  div.innerHTML = `Valor: <input type="number" class="value" placeholder="Valor"> Peso: <input type="number" class="weight" placeholder="Peso">`;
+  div.innerHTML = `<input type="number" class="value" placeholder="Valor"> <input type="number" class="weight" placeholder="Peso">`;
   container.appendChild(div);
 }
 
@@ -34,14 +34,14 @@ async function mochilaFraccionaria() {
   }
 
   if (items.length === 0 || isNaN(pesoMaximo) || pesoMaximo <= 0) {
-    log.innerHTML = "⚠️ Por favor, ingresa datos válidos.";
+    log.innerHTML = "Por favor, ingresa datos válidos.";
     return;
   }
 
   items.sort((a, b) => b.efficiency - a.efficiency);
-  log.innerHTML += `📊 Objetos ordenados por eficiencia (valor/peso):\n`;
+  log.innerHTML += `<p>Objetos ordenados por eficiencia (valor/peso):</p>\n`;
   items.forEach(item => {
-    log.innerHTML += `Item ${item.index + 1} - Valor: ${item.value}, Peso: ${item.weight}, Eficiencia: ${item.efficiency.toFixed(2)}\n`;
+    log.innerHTML += `<p>Item ${item.index + 1} - Valor: ${item.value}, Peso: ${item.weight}, Eficiencia: ${item.efficiency.toFixed(2)}\n</p>`;
   });
 
   let totalValue = 0;
@@ -80,7 +80,7 @@ async function mochilaFraccionaria() {
       objDiv.style.opacity = 1;
       objDiv.style.transform = "scale(1)";
 
-      log.innerHTML += `✅ Tomar Item ${item.index + 1}: valor ${item.value}, peso ${item.weight}, tomado ${(fraction * 100).toFixed(2)}%\n`;
+      log.innerHTML += `<p>Tomar Item ${item.index + 1}: valor ${item.value}, peso ${item.weight}, tomado ${(fraction * 100).toFixed(2)}%\n</p>`;
 
       const usedPercentage = (usedWeight / pesoMaximo) * 100;
       const unusedPercentage = 100 - usedPercentage;
@@ -93,10 +93,39 @@ async function mochilaFraccionaria() {
     }
 
     if (remainingWeight === 0) {
-      log.innerHTML += `\n🎒 Mochila llena.\n`;
+      log.innerHTML += `<p>\nMochila llena.\n</p>`;
       break;
     }
   }
 
   document.getElementById("totalM").textContent = `Valor total en la mochila: ${totalValue.toFixed(2)}`;
+
+  document.getElementById("cantidadCambio").value = totalValue.toFixed(2);
+  calcularCambio();
+}
+
+
+function calcularCambio() {
+  const cantidad = parseFloat(document.getElementById("cantidadCambio").value);  // Cantidad a devolver
+  const billetes = [500, 200, 100, 50, 20, 10, 5, 2, 1];  // Billetes disponibles
+  let cambioRestante = cantidad;
+  let resultado = '';
+  
+  if (isNaN(cantidad) || cantidad <= 0) {
+    alert("Por favor, ingresa una cantidad válida.");
+    return;
+  }
+
+  // Recorrer los billetes y devolver el cambio
+  for (let i = 0; i < billetes.length; i++) {
+    let numBilletes = Math.floor(cambioRestante / billetes[i]);  // Calcular cuántos billetes de este valor
+    if (numBilletes > 0) {
+      resultado += `${numBilletes} billetes de ${billetes[i]} 
+`;
+      cambioRestante -= numBilletes * billetes[i];  // Restar el valor de los billetes dados
+    }
+  }
+
+  // Mostrar el resultado
+  document.getElementById("resultadoCambio").innerText = resultado || "No se puede devolver esta cantidad.";
 }

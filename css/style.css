@@ -1,11 +1,24 @@
 *{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "DynaPuff", system-ui;;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 body {
   font-family: Arial, sans-serif;
-  background: #c7d4da;
+  background: #eff1f1;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
@@ -13,62 +26,118 @@ h1 {
 }
 
 .contenedor{
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
+  background: rgb(230, 233, 236);
 }
 
-.contenedor, .mochilaF{
-  background: rgb(228, 182, 138);
+.contenedor, .mochilaF, .contenedor-cajero{
   padding: 20px;
-  margin: 10px auto;
   border-radius: 10px;
-  max-width: 700px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 80%;
+  max-width: 1000px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.contenedor label{
+.mochilaF{
+  background: rgb(228, 182, 138);
+}
+
+.margen label{
+  margin: 20px;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
+}
+
+.margen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  border: 4px dashed #464e54;
+  width: 98%;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  background: white;
 }
 
 #pesoMaximo{
   width: 300px;
   border: none;
   border-radius: 10px;
+  height: 30px;
+  text-align: center;
+  font-size: 20px;
+  background: #d6d5d5;
+  border: 3px dashed #624a3c;
+}
+
+#pesoMaximo::placeholder{
+  text-align: center;
+  font-size: 12px;
+  color: white;
 }
 
 .item {
   margin-bottom: 10px;
 }
+
+.value{
+  margin-right: 20px;
+}
+
+.value, .weight{
+  text-align: center;
+  width: 90px;
+  height: 30px;
+  border: 3px dashed #624a3c;
+  border-radius: 10px;
+}
+
+.value::placeholder{
+  text-align: center;
+}
+
+.weight::placeholder{
+  text-align: center;
+}
     
 #contenedorI div {
   margin-bottom: 5px;
 }
+
+#totalM{
+  color: rgb(26, 21, 15);
+  text-align: center;
+}
     
 .mochila {
   margin-top: 30px;
-  border: 2px dashed #444;
+  border: 5px dashed #444;
   min-height: 160px;
   padding: 10px;
-  background: #fefefe;
+  background: #ffffff;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-in-out;
+  border-radius: 10px;
 }
 .objeto {
   min-width: 140px;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #cad2de;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   opacity: 0;
   transform: scale(0.8);
@@ -76,22 +145,27 @@ h1 {
 }
     
 .pasosR {
-  background: #eef;
+  background: rgb(255, 255, 255);
   padding: 10px;
   border-radius: 8px;
   margin-top: 10px;
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
   
 .barra {
   margin-top: 20px;
   height: 30px;
-  background-color: #ccc;
+  background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
 }
+
     
 .barraLlena, .barraVacia {
   height: 100%;
@@ -104,21 +178,53 @@ h1 {
 }
     
 .barraLlena {
-  background-color: #2196F3;
+  background-color: #77787a;
 }
 
 .barraVacia {
-  background-color: #888;
+  color: #464e54;
+  background-color: #cccccc;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .botonA {
   margin-top: 10px;
-  padding: 6px 12px;
+  padding: 12px;
   border: none;
-  background-color: #f2cba0;
+  background-color: #5d5d5d;
   color: white;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.botonR{
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  background-color: #5d5d5d;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.contenedor-cajero{
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contenedor-cajero label{
+  text-align: center;
+}
+
+#cantidadCambio{
+  background: #101315;
+  color: white;
+  text-align: center;
+  width: 300px;
+  height: 70px;
 }

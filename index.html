@@ -5,14 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mochila Fraccionaria</title>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Glory:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  
+  <div class="navbar">
+    
+  </div>
   <div class="contenedor">
-    <label>Peso máximo de la mochila <br><input type="number" id="pesoMaximo" placeholder="Coloca el peso que desees"></label>
-    <div id="contenedorI"></div>
-    <button class="botonA" onclick="agregarObjeto()">Agregar objeto</button>
-    <button onclick="mochilaFraccionaria()">Ejecutar</button>
+    <div class="margen">
+      <label>Peso máximo de la mochila <br><input type="number" id="pesoMaximo" placeholder="Coloca el peso que desees"></label>
+      <div id="contenedorI"></div>
+      <button class="botonA" onclick="agregarObjeto()">Agregar objeto</button>
+      <button class="botonR" onclick="mochilaFraccionaria()">Ejecutar</button>
+    </div>
   </div>
 
   <div class="mochilaF">
@@ -24,6 +32,13 @@
     </div>
     <div class="pasosR" id="pasosR"></div>
   </div>
+
+  <div class="contenedor-cajero">
+    <label>Cantidad a devolver <br><input type="number" id="cantidadCambio" placeholder="Ingresa la cantidad de cambio"></label>
+    <button onclick="calcularCambio()">Calcular Cambio</button>
+    <pre id="resultadoCambio"></pre>
+  </div>
+
 
   <script src="./js/script.js"></script>
 </body>
