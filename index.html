@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <div class="navbar">
-    
-  </div>
+  <div class="navbar"></div>
+
   <div class="contenedor">
     <div class="margen">
       <label>Peso máximo de la mochila <br><input type="number" id="pesoMaximo" placeholder="Coloca el peso que desees"></label>
@@ -37,10 +36,9 @@
     <label>Cantidad a devolver <br><input type="number" id="cantidadCambio" placeholder="Ingresa la cantidad de cambio"></label>
     <button onclick="calcularCambio()">Calcular Cambio</button>
     <pre id="resultadoCambio"></pre>
+    <div id="animacionCajero" class="mochila" style="background:#f3f3f3; min-height: 50px;"></div>
   </div>
-
 
   <script src="./js/script.js"></script>
 </body>
 </html>
-
