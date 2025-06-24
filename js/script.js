@@ -6,7 +6,7 @@ function agregarObjeto() {
   container.appendChild(div);
 }
 
-async function runKnapsack() {
+async function mochilaFraccionaria() {
   const values = document.querySelectorAll(".value");
   const weights = document.querySelectorAll(".weight");
   const pesoMaximo = parseFloat(document.getElementById("pesoMaximo").value);
