@@ -7,29 +7,29 @@ function agregarObjeto() {
 }
 
 async function mochilaFraccionaria() {
-  const values = document.querySelectorAll(".value");
-  const weights = document.querySelectorAll(".weight");
+  const valores = document.querySelectorAll(".value");
+  const pesos = document.querySelectorAll(".weight");
   const pesoMaximo = parseFloat(document.getElementById("pesoMaximo").value);
   const mochila = document.getElementById("mochila");
   const log = document.getElementById("pasosR");
-  const barFill = document.getElementById("barraL");
-  const barEmpty = document.getElementById("barraV");
+  const barraLlena = document.getElementById("barraL");
+  const barraVacia = document.getElementById("barraV");
 
   mochila.innerHTML = "";
   log.innerHTML = "";
-  barFill.style.width = "0%";
-  barEmpty.style.width = "100%";
-  barFill.textContent = "0%";
-  barEmpty.textContent = "100%";
+  barraLlena.style.width = "0%";
+  barraVacia.style.width = "100%";
+  barraLlena.textContent = "0%";
+  barraVacia.textContent = "100%";
 
   let items = [];
 
-  for (let i = 0; i < values.length; i++) {
-    const value = parseFloat(values[i].value);
-    const weight = parseFloat(weights[i].value);
+  for (let i = 0; i < valores.length; i++) {
+    const value = parseFloat(valores[i].value);
+    const weight = parseFloat(pesos[i].value);
     if (!isNaN(value) && !isNaN(weight) && weight > 0 && value >= 0) {
-      const efficiency = value / weight;
-      items.push({ value, weight, index: i, efficiency });
+      const eficienciaA = value / weight;
+      items.push({ value, weight, index: i, eficienciaA });
     }
   }
 
@@ -38,74 +38,73 @@ async function mochilaFraccionaria() {
     return;
   }
 
-  items.sort((a, b) => b.efficiency - a.efficiency);
+  items.sort((a, b) => b.eficienciaA - a.eficienciaA);
   log.innerHTML += `<p>Objetos ordenados por eficiencia (valor/peso):</p>\n`;
   items.forEach(item => {
-    log.innerHTML += `<p>Item ${item.index + 1} - Valor: ${item.value}, Peso: ${item.weight}, Eficiencia: ${item.efficiency.toFixed(2)}</p>`;
+    log.innerHTML += `<p>Item ${item.index + 1} - Valor: ${item.value}, Peso: ${item.weight}, Eficiencia: ${item.eficienciaA.toFixed(2)}</p>`;
   });
 
-  let totalValue = 0;
-  let remainingWeight = pesoMaximo;
-  let usedWeight = 0;
+  let ValorTotal = 0;
+  let pesoRem = pesoMaximo;
+  let pesoUsado = 0;
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     const objDiv = document.createElement("div");
     objDiv.className = "objeto";
 
-    let takenWeight = 0;
-    let takenValue = 0;
-    let fraction = 0;
+    let tomarPeso = 0;
+    let tomarValor = 0;
+    let fraccion = 0;
 
-    if (item.weight <= remainingWeight) {
-      takenWeight = item.weight;
-      takenValue = item.value;
-      fraction = 1;
-      remainingWeight -= item.weight;
-    } else if (remainingWeight > 0) {
-      takenWeight = remainingWeight;
-      fraction = remainingWeight / item.weight;
-      takenValue = item.value * fraction;
-      remainingWeight = 0;
+    if (item.weight <= pesoRem) {
+      tomarPeso = item.weight;
+      tomarValor = item.value;
+      fraccion = 1;
+      pesoRem -= item.weight;
+    } else if (pesoRem > 0) {
+      tomarPeso = pesoRem;
+      fraccion = pesoRem / item.weight;
+      tomarValor = item.value * fraccion;
+      pesoRem = 0;
     }
 
-    if (fraction > 0) {
-      usedWeight += takenWeight;
-      totalValue += takenValue;
+    if (fraccion > 0) {
+      pesoUsado += tomarPeso;
+      ValorTotal += tomarValor;
 
-      // Resaltar inputs del item tomado
-      const valueInput = values[item.index];
-      const weightInput = weights[item.index];
+      const valueInput = valores[item.index];
+      const weightInput = pesos[item.index];
       valueInput.classList.add("resaltado");
       weightInput.classList.add("resaltado");
 
-      objDiv.innerText = `Item ${item.index + 1} - ${(fraction * 100).toFixed(2)}%\nEf: ${item.efficiency.toFixed(2)}`;
+      objDiv.innerText = `Item ${item.index + 1} - ${(fraccion * 100).toFixed(2)}%\nEf: ${item.eficienciaA.toFixed(2)}`;
       mochila.appendChild(objDiv);
 
       await new Promise(r => setTimeout(r, 300));
       objDiv.style.opacity = 1;
       objDiv.style.transform = "scale(1)";
 
-      log.innerHTML += `<p>Tomar Item ${item.index + 1}: valor ${item.value}, peso ${item.weight}, tomado ${(fraction * 100).toFixed(2)}%</p>`;
+      log.innerHTML += `<p>Tomar Item ${item.index + 1}: valor ${item.value}, peso ${item.weight}, tomado ${(fraccion * 100).toFixed(2)}%</p>`;
 
-      const usedPercentage = (usedWeight / pesoMaximo) * 100;
-      const unusedPercentage = 100 - usedPercentage;
-      barFill.style.width = `${usedPercentage}%`;
-      barEmpty.style.width = `${unusedPercentage}%`;
-      barFill.textContent = `${usedPercentage.toFixed(0)}%`;
-      barEmpty.textContent = `${unusedPercentage.toFixed(0)}%`;
+      const porcentajeUsado = (pesoUsado / pesoMaximo) * 100;
+      const porcentajeFalt = 100 - porcentajeUsado;
+      barraLlena.style.width = `${porcentajeUsado}%`;
+      barraVacia.style.width = `${porcentajeFalt}%`;
+      barraLlena.textContent = `${porcentajeUsado.toFixed(0)}%`;
+      barraVacia.textContent = `${porcentajeFalt.toFixed(0)}%`;
 
       await new Promise(r => setTimeout(r, 800));
     }
 
-    if (remainingWeight === 0) {
+    if (pesoRem === 0) {
       log.innerHTML += `<p>\nMochila llena.\n</p>`;
       break;
     }
   }
 
-  document.getElementById("totalM").textContent = `Valor total en la mochila: ${totalValue.toFixed(2)}`;
-  document.getElementById("cantidadCambio").value = totalValue.toFixed(2);
+  document.getElementById("totalM").textContent = `Valor total en la mochila: ${ValorTotal.toFixed(2)}`;
+  document.getElementById("cantidadCambio").value = ValorTotal.toFixed(2);
   calcularCambio();
 }
 
